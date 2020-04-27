@@ -54,7 +54,7 @@ def initializer():
 
 if __name__ == '__main__':
     initializer()
-    run_simple('0.0.0.0', 10001, app,
-               use_reloader=True, use_debugger=True, use_evalex=True)
+    # run_simple('0.0.0.0', 10001, app,
+    #            use_reloader=True, use_debugger=True, use_evalex=True)
     http_server = WSGIServer(('0.0.0.0', 10001), app)
     http_server.serve_forever()

@@ -6,6 +6,7 @@ from utils.check_authority import permission_required
 from . import api
 
 influx_client = InfluxDBClient(influx_host, influx_port)
+influx_client.create_database('nuc-info-log')
 influx_client.query('CREATE RETENTION POLICY "1_day" ON "nuc-info-log" DURATION 1d REPLICATION 1 DEFAULT')
 
 

@@ -1,17 +1,19 @@
+import logging
 from datetime import timedelta
 from os import path
 
 from flask import Flask, jsonify
 from flask_jwt import JWT
 from gevent.pywsgi import WSGIServer
-from werkzeug import run_simple
 
 from global_config import token_expire, secret_key
 from models.user import User
 from startup import load_plugin
+from utils.logger import root_logger
+
+# from werkzeug import run_simple
 
 app = Flask(__name__)
-app.debug = True
 app.config['JWT_AUTH_HEADER_PREFIX'] = 'Bearer'
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['SECRET_KEY'] = secret_key
@@ -49,12 +51,11 @@ def initializer():
     )
     for i in plugins:
         app.register_blueprint(i.api)
-    print(app.url_map)
 
 
 if __name__ == '__main__':
     initializer()
     # run_simple('0.0.0.0', 10001, app,
     #            use_reloader=True, use_debugger=True, use_evalex=True)
-    http_server = WSGIServer(('0.0.0.0', 10001), app)
+    http_server = WSGIServer(('0.0.0.0', 10001), app, log=root_logger, error_log=root_logger)
     http_server.serve_forever()

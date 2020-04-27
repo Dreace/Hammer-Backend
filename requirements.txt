@@ -1,0 +1,8 @@
+gevent
+Flask-JWT
+flask
+pymysql
+DBUtils
+cryptography
+redis
+influxdb

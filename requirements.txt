@@ -6,3 +6,4 @@ DBUtils
 cryptography
 redis
 influxdb
+flask-cors

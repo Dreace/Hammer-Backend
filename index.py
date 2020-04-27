@@ -1,8 +1,8 @@
-import logging
 from datetime import timedelta
 from os import path
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_jwt import JWT
 from gevent.pywsgi import WSGIServer
 
@@ -14,6 +14,7 @@ from utils.logger import root_logger
 # from werkzeug import run_simple
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 app.config['JWT_AUTH_HEADER_PREFIX'] = 'Bearer'
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['SECRET_KEY'] = secret_key

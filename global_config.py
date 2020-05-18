@@ -17,6 +17,10 @@ mysql_password = environ.get('MYSQL_PASSWORD')
 
 influx_host = environ.get('INFLUX_HOST')
 influx_port = environ.get('INFLUX_PORT')
+
+wx_appid = environ.get('WX_APPID')
+wx_secret = environ.get('WX_SECRET')
+
 mysql_pool = PooledDB(
     creator=pymysql,  # 使用链接数据库的模块
     maxconnections=10,  # 连接池允许的最大连接数，0和None表示不限制连接数

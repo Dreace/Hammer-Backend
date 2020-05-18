@@ -7,3 +7,4 @@ cryptography
 redis
 influxdb
 flask-cors
+requests

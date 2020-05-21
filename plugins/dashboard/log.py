@@ -8,7 +8,7 @@ from . import api
 influx_client = InfluxDBClient(influx_host, influx_port)
 influx_client.create_database('nuc-info-log')
 influx_client.query('CREATE RETENTION POLICY "1_day" ON "nuc-info-log" DURATION 1d REPLICATION 1 DEFAULT')
-
+influx_client.query('CREATE RETENTION POLICY "1_day" ON "_internal" DURATION 1d REPLICATION 1 DEFAULT')
 
 @api.route('/log')
 @jwt_required()

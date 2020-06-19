@@ -14,7 +14,7 @@ influx_client.query('CREATE RETENTION POLICY "1_day" ON "nuc-info-log" DURATION 
 @jwt_required()
 @permission_required(['admin'])
 def dashboard_log():
-    res = influx_client.query('SELECT * FROM "root" ORDER BY time DESC LIMIT 30', database='nuc-info-log')
+    res = influx_client.query('SELECT * FROM "root" WHERE time > now() - 10m LIMIT 30', database='nuc-info-log')
     data = []
     for i in res:
         for j in i:

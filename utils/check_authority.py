@@ -3,8 +3,6 @@ from functools import wraps
 from flask import abort
 from flask_jwt import current_identity
 
-from models.user import User
-
 
 def permission_required(authority_required):
     """

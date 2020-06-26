@@ -6,7 +6,8 @@ from flask_cors import CORS
 from flask_jwt import JWT
 from gevent.pywsgi import WSGIServer
 
-from global_config import token_expire, secret_key
+from global_config import token_expire, secret_key, mysql_password, mysql_user, mysql_host
+from models.sqlalchemy_db import db
 from models.user import User
 from startup import load_plugin
 from utils.logger import root_logger
@@ -14,14 +15,23 @@ from utils.logger import root_logger
 # from werkzeug import run_simple
 
 app = Flask(__name__)
+
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+
 app.config['JWT_AUTH_HEADER_PREFIX'] = 'Bearer'
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['SECRET_KEY'] = secret_key
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=token_expire)
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_BINDS'] = {
+    'notice': 'mysql+pymysql://{}:{}@{}:3306/nuc_info'.format(mysql_user, mysql_password, mysql_host)
+}
 # TODO JWT is valid for one hour, need to add refresh operation
 # TODO May replace Flask-JWT to Flask-JWT-Extended
 jwt = JWT(app, User.authenticate, User.identity)
+
+db.init_app(app)
 
 
 @jwt.auth_response_handler

@@ -1,3 +1,4 @@
+Flask-SQLAlchemy
 gevent
 Flask-JWT
 flask

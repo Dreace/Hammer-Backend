@@ -25,7 +25,8 @@ app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=token_expire)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_BINDS'] = {
-    'notice': 'mysql+pymysql://{}:{}@{}:3306/nuc_info'.format(mysql_user, mysql_password, mysql_host)
+    'nuc-info': 'mysql+pymysql://{}:{}@{}:3306/nuc_info'.format(mysql_user, mysql_password, mysql_host),
+    'hammer': 'mysql+pymysql://{}:{}@{}:3306/hammer'.format(mysql_user, mysql_password, mysql_host)
 }
 # TODO JWT is valid for one hour, need to add refresh operation
 # TODO May replace Flask-JWT to Flask-JWT-Extended

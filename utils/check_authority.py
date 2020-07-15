@@ -7,7 +7,6 @@ from flask_jwt import current_identity
 def permission_required(authority_required):
     """
     :param authority_required:
-    :return:
     """
 
     def decorator(f):

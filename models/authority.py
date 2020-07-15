@@ -4,7 +4,7 @@ from models.sqlalchemy_db import db
 
 
 class Authority(db.Model):
-    __tablename__ = 'authority_test'
+    __tablename__ = 'authority'
     __bind_key__ = 'hammer'
     id_ = db.Column('id', db.Integer, primary_key=True)
     name = db.Column('name', db.VARCHAR(25))

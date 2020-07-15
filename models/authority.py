@@ -19,6 +19,7 @@ class Authority(db.Model):
         :return: dict
         """
         return {
+            "id": self.id_,
             "name": self.name,
             "chineseName": self.chinese_name,
             "description": self.description,

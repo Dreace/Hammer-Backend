@@ -5,6 +5,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt import JWT
 from gevent.pywsgi import WSGIServer
+from werkzeug import run_simple
 
 from global_config import token_expire, secret_key, mysql_password, mysql_user, mysql_host
 from models.sqlalchemy_db import db
@@ -67,7 +68,7 @@ def initializer():
 
 if __name__ == '__main__':
     initializer()
-    # run_simple('0.0.0.0', 10001, app,
-    #            use_reloader=True, use_debugger=True, use_evalex=True)
+    run_simple('0.0.0.0', 10001, app,
+               use_reloader=True, use_debugger=True, use_evalex=True)
     http_server = WSGIServer(('0.0.0.0', 10001), app, log=root_logger, error_log=root_logger)
     http_server.serve_forever()

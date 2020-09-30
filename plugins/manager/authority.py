@@ -63,7 +63,6 @@ def manager_authority_delete(authority_id: int):
 @permission_required(['admin'])
 def manager_authority_edit(authority_id: int):
     authority: Authority = Authority.query.get(authority_id)
-    print(authority)
     if not authority:
         abort(404)
     post_data = request.get_json()
